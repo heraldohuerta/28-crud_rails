@@ -1,0 +1,45 @@
+<p id="notice"><%= notice %></p>
+
+<div class="container">
+<p>
+  <h1> Ingreso de  Productos  para categoria <%= @category.name %>  </h1>
+</p>
+
+
+<%= form_with(model: [ @category, @product ] , local:true ) do |f| %>
+          <div class="field">
+            <%= f.label :name %>
+            <%= f.text_field :name, id: :product_name %>
+
+            <%= f.label :price %>
+            <%= f.number_field :price, id: :product_name %>
+
+            <%= f.submit :enviar,class:"btn btn-primary"  %>
+        </div>
+<% end %>
+<br><br>
+<hr>
+<h4> Registros de Productos Almacenados para categoria <%= @category.name %>  </h4>
+<table class="table">
+  <thead>
+  <tr>
+    <th scope="col">Accion</th>
+    <th scope="col">Nombre</th>
+    <th scope="col">Precio</th>
+  </tr>
+  </thead>
+  <tbody>
+<% @productos.each do |product| %>
+  <tr>
+    <th scope="row">  <%= link_to 'Eliminar', category_product_path(@category,product), method: :delete %></th>
+    <td> <%= product.name%> </td>
+    <td>  <%= product.price %> </td>
+  </tr>
+<% end %>
+</tbody>
+</table>
+<br><br><br>
+<!-- <%= link_to 'Edit', edit_category_path(@category), class:'btn btn-primary' %> -->
+<%= link_to 'Back', categories_path, class:'btn btn-primary'  %>
+
+</div>
